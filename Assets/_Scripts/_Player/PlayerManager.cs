@@ -18,10 +18,14 @@ namespace MINIGAME
         public bool isInAir;
         public bool isGrounded;
 
+        private void Awake()
+        {
+            cameraHandler = FindObjectOfType<CameraHandler>();
+        }
+
         // Start is called before the first frame update
         private void Start()
         {
-            cameraHandler = CameraHandler.cameraHandler;
             inputHandler = GetComponent<InputHandler>();
             anim = GetComponentInChildren<Animator>();
             playerLocomotion = GetComponent<PlayerLocomotion>();

@@ -213,6 +213,7 @@ namespace MINIGAME
                 {
                     playerManager.isGrounded = false;
                 }
+
                 if (!playerManager.isInAir)
                 {
                     if (!playerManager.isInteracting)
