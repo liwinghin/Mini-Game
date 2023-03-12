@@ -15,6 +15,7 @@ namespace MINIGAME
         int vertical;
         int horizontal;
         public bool canRotate;
+
         public void Init()
         {
             playerManager = GetComponentInParent<PlayerManager>();
@@ -24,6 +25,7 @@ namespace MINIGAME
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");
         }
+
         public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting)
         {
             #region Vertical
@@ -89,9 +91,19 @@ namespace MINIGAME
             anim.CrossFade(targetAnim, 0.2f);
         }
 
-        public void SetRotate(bool rotate)
+        public void SetRotate(bool state)
         {
-            canRotate = rotate;
+            canRotate = state;
+        }
+
+        public void EnableCombo()
+        {
+            anim.SetBool("canDoCombo", true);
+        }
+
+        public void DisableCombo()
+        {
+            anim.SetBool("canDoCombo", false);
         }
 
         private void OnAnimatorMove()

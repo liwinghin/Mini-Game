@@ -18,12 +18,14 @@ namespace MINIGAME
 
         public bool rollFlag;
         public bool sprintFlag;
+        public bool comboFlag;
 
         public float rollInputTimer;
 
         PlayerControls inputActions;
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
+        PlayerManager playerManager;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -32,7 +34,9 @@ namespace MINIGAME
         {
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
+            playerManager = GetComponent<PlayerManager>();
         }
+
         public void OnEnable()
         {
             if (inputActions == null)
@@ -43,6 +47,7 @@ namespace MINIGAME
             }
             inputActions.Enable();
         }
+
         private void OnDisable()
         {
             inputActions.Disable();
@@ -54,6 +59,7 @@ namespace MINIGAME
             HandleRollInput(delta);
             HandleAttackInput(delta);
         }
+
         private void MoveInput(float delta)
         {
             horizontal = movementInput.x;
@@ -88,8 +94,27 @@ namespace MINIGAME
             inputActions.PlayerActions.RB.performed += i => rb_Input = true;
             inputActions.PlayerActions.RT.performed += i => rt_Input = true;
 
-            if (rb_Input) { playerAttacker.HandleLightAttack(playerInventory.rightWeapon); }
-            if (rt_Input) { playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon); }
+            if (rb_Input)
+            {
+                if (playerManager.canDoCombo)
+                {
+                    comboFlag = true;
+                    playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
+                    comboFlag = false;
+                }
+                else
+                {
+                    if (playerManager.isInteracting)
+                        return;
+                    if (playerManager.canDoCombo)
+                        return;
+                    playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+                }
+            }
+            if (rt_Input)
+            {
+                playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+            }
         }
     }
 }
