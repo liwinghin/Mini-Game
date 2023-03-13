@@ -21,7 +21,6 @@ namespace MINIGAME
             if (inputHandler.comboFlag)
             {
                 animatorHandler.anim.SetBool("CanDoCombo", false);
-                print(lastAttack);
                 if (lastAttack == weapon.oh_Light_Attack_01)
                 {
                     animatorHandler.PlayTargetAnimation(weapon.oh_Light_Attack_02, true);
@@ -37,10 +36,8 @@ namespace MINIGAME
 
         public void HandleHeavyAttack(WeaponItem weapon)
         {
-            animatorHandler.PlayTargetAnimation(weapon.oh_Heavy_Attack_02, true);
-            lastAttack = weapon.oh_Heavy_Attack_02;
-
-
+            animatorHandler.PlayTargetAnimation(weapon.oh_Heavy_Attack_01, true);
+            lastAttack = weapon.oh_Heavy_Attack_01;
         }
     }
 }

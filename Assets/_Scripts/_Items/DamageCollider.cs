@@ -40,7 +40,7 @@ namespace MINIGAME
             if (other.tag == "Enemy")
             {
                 EnemyStats enemyStats = other.GetComponent<EnemyStats>();
-                if (enemyStats != null)
+                if (enemyStats != null && enemyStats.currentHealth > 0)
                 {
                     enemyStats.TakeDamage(currentWeaponDamage);
                 }

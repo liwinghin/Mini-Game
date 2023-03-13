@@ -1991,14 +1991,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714284729}
-  m_LocalRotation: {x: -0.30150744, y: 0.9137388, z: -0.25902435, w: 0.084148824}
-  m_LocalPosition: {x: 0.9, y: -0.8, z: 1.7}
+  m_LocalRotation: {x: -0.2456026, y: 0.9289668, z: -0.27565402, w: -0.02673887}
+  m_LocalPosition: {x: -0.2, y: -2, z: -1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 20829303}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 25, y: 160, z: -41}
+  m_LocalEulerAnglesHint: {x: 31.687, y: 174.218, z: -31.26}
 --- !u!4 &1753388676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4151475019238542, guid: 382f8383e1a83e8448eaf818842c6fd9, type: 3}
@@ -2405,9 +2405,9 @@ GameObject:
   - component: {fileID: 1911863920}
   - component: {fileID: 1911863924}
   - component: {fileID: 1911863923}
+  - component: {fileID: 1911863925}
   - component: {fileID: 1911863926}
   - component: {fileID: 1911863922}
-  - component: {fileID: 1911863925}
   - component: {fileID: 1911863927}
   - component: {fileID: 1911863928}
   - component: {fileID: 1911863929}
@@ -2426,7 +2426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911863919}
   m_LocalRotation: {x: -0, y: -0.9999994, z: -0, w: 0.0011248767}
-  m_LocalPosition: {x: -7.826, y: 4.23, z: 2.970256}
+  m_LocalPosition: {x: -7.826, y: 1.11, z: 2.970256}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2456,6 +2456,7 @@ MonoBehaviour:
   rt_Input: 0
   rollFlag: 0
   sprintFlag: 0
+  comboFlag: 0
   rollInputTimer: 0
 --- !u!54 &1911863923
 Rigidbody:
@@ -2503,6 +2504,7 @@ MonoBehaviour:
   isSprinting: 0
   isInAir: 0
   isGrounded: 0
+  canDoCombo: 0
 --- !u!114 &1911863926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2555,6 +2557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a2cba4452754751927cbfa3f2dba82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastAttack: 
 --- !u!114 &1911863929
 MonoBehaviour:
   m_ObjectHideFlags: 0
