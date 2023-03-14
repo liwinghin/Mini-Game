@@ -6,4 +6,4 @@ Walk,
 Sprint,
 Rolling,
 
-![](Gif/movement.gif)
+![](Movement.gif)
