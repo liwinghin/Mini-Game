@@ -6,4 +6,4 @@ Walk,
 Sprint,
 Rolling,
 
-![](Movement.gif)
+![camerasystem](https://github.com/liwinghin/Mini-Game/blob/main/Gif/CameraSystem.gif)
