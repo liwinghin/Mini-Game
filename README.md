@@ -2,9 +2,8 @@
  unity pratice
 
 Player Locomotion:
-Walk
-Sprint
-Falling
-Rolling
+Walk,
+Sprint,
+Rolling,
 
 ![](movement.gif)
