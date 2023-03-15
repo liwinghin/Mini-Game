@@ -61,6 +61,10 @@ namespace MINIGAME
             inputHandler.sprintFlag = false;
             inputHandler.rb_Input = false;
             inputHandler.rt_Input = false;
+            inputHandler.d_Pad_Left = false;
+            inputHandler.d_Pad_Right = false;
+            inputHandler.d_Pad_Up = false;
+            inputHandler.d_Pad_Down = false;
 
             if (isInAir)
             {
