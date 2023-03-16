@@ -13,10 +13,12 @@ namespace MINIGAME
         DamageCollider rightHandDamageCollider;
 
         Animator animator;
+        QuickSlotsUI quickSlotsUI;
 
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
 
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
@@ -32,6 +34,8 @@ namespace MINIGAME
             {
                 leftHandSlot.LoadWeaponModel(weaponItem);
                 LoadLeftWeaponDamageCollider();
+                quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem);
+
                 if(weaponItem != null)
                 {
                     animator.CrossFade(weaponItem.left_arm_idle, 0.2f);
@@ -45,6 +49,8 @@ namespace MINIGAME
             {
                 rightHandSlot.LoadWeaponModel(weaponItem);
                 LoadRightWeaponDamageCollider();
+                quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
+
                 if (weaponItem != null)
                 {
                     animator.CrossFade(weaponItem.right_arm_idle, 0.2f);
