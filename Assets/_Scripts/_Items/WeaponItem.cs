@@ -19,5 +19,10 @@ namespace MINIGAME
         public string oh_Light_Attack_02;
         public string oh_Heavy_Attack_01;
 
+        [Header("Stamina Costs")]
+        public int baseStamina;
+        public float lightAttackMultiplier;
+        public float heavyAttackMultiplier;
+         
     }
 }
