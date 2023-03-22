@@ -9,10 +9,10 @@ namespace MINIGAME
         public Transform targetTransform;
         public Transform cameraTransform;
         public Transform cameraPivotTransform;
+        public LayerMask ignoreLayer;
 
         private Transform m_Transform;
         private Vector3 cameraTransformPosition;
-        private LayerMask ignoreLayer;
         private Vector3 cameraFollowVelocity = Vector3.zero;
 
         public static CameraHandler cameraHandler;

@@ -13,6 +13,8 @@ namespace MINIGAME
         public float mouseY;
 
         public bool b_Input;
+        public bool a_Input;
+
         public bool rb_Input;
         public bool rt_Input;
 
@@ -64,6 +66,7 @@ namespace MINIGAME
             HandleRollInput(delta);
             HandleAttackInput(delta);
             HandleQuickSlotsInput();
+            HandleInteractionButtonInput();
         }
 
         private void MoveInput(float delta)
@@ -136,6 +139,11 @@ namespace MINIGAME
             {
                 playerInventory.ChangeLeftWeapon();
             }
+        }
+
+        private void HandleInteractionButtonInput()
+        {
+            inputActions.PlayerActions.A.performed += i => a_Input = true;
         }
     }
 }
