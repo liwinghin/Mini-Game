@@ -10,6 +10,9 @@ namespace MINIGAME
         Animator anim;
         CameraHandler cameraHandler;
         PlayerLocomotion playerLocomotion;
+        InteractableUI interactableUI;
+        public GameObject interactableUIGameObject;
+        public GameObject itemInteractableGameObject;
 
         public bool isInteracting;
 
@@ -30,6 +33,7 @@ namespace MINIGAME
             inputHandler = GetComponent<InputHandler>();
             anim = GetComponentInChildren<Animator>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
+            interactableUI = FindObjectOfType<InteractableUI>();
         }
 
         // Update is called once per frame
@@ -89,12 +93,25 @@ namespace MINIGAME
                         string interactableText = interactableObject.interactbleText;
                         //Set UI Text to the Interactable Obj's text
                         //Set Pop Up Text
+                        interactableUI.interactableText.text = interactableText;
+                        interactableUIGameObject.SetActive(true);
 
                         if (inputHandler.a_Input)
                         {
                             hit.collider.GetComponent<Interactable>().Interact(this);
                         }
                     }
+                }
+            }
+            else
+            {
+                if (interactableUIGameObject != null)
+                {
+                    interactableUIGameObject.SetActive(false);
+                }
+                if (itemInteractableGameObject != null && inputHandler.a_Input)
+                {
+                    itemInteractableGameObject.SetActive(false);
                 }
             }
         }
