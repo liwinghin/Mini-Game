@@ -240,6 +240,24 @@ namespace MINIGAME
             }
         }
 
+        public void HandleJumping()
+        {
+            if (playerManager.isInteracting)
+                return;
+            if (inputHandler.jump_Input)
+            {
+                if(inputHandler.moveAmount > 0)
+                {
+                    moveDirection = cameraObj.forward * inputHandler.vertical;
+                    moveDirection += cameraObj.right * inputHandler.horizontal;
+                    animatorHandler.PlayTargetAnimation("Jump", true);
+                    moveDirection.y = 0;
+                    Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
+                    myTransform.rotation = jumpRotation;
+                }
+            }
+        }
+
         #endregion
     }
 }
