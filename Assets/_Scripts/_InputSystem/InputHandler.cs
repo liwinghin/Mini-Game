@@ -19,6 +19,7 @@ namespace MINIGAME
         public bool rt_Input;
 
         public bool jump_Input;
+        public bool inventory_Input;
 
         public bool d_Pad_Up;
         public bool d_Pad_Down;
@@ -28,6 +29,7 @@ namespace MINIGAME
         public bool rollFlag;
         public bool sprintFlag;
         public bool comboFlag;
+        public bool inventoryFlag;
 
         public float rollInputTimer;
 
@@ -35,6 +37,7 @@ namespace MINIGAME
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         PlayerManager playerManager;
+        UIManager uIManager;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -44,6 +47,7 @@ namespace MINIGAME
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
+            uIManager = FindObjectOfType<UIManager>();
         }
 
         public void OnEnable()
@@ -70,6 +74,7 @@ namespace MINIGAME
             HandleQuickSlotsInput();
             HandleInteractionButtonInput();
             HandleJumpInput();
+            HandleInventoryInput();
         }
 
         private void MoveInput(float delta)
@@ -152,6 +157,24 @@ namespace MINIGAME
         private void HandleJumpInput()
         {
             inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
+        }
+
+        private void HandleInventoryInput()
+        {
+            inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
+            if (inventory_Input)
+            {
+                inventoryFlag = !inventoryFlag;
+
+                if (inventoryFlag)
+                {
+                    uIManager.OpenSelectWindow();
+                }
+                else
+                {
+                    uIManager.CloseSelectWindow();
+                }
+            }
         }
     }
 }
