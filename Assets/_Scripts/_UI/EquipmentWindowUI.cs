@@ -27,7 +27,6 @@ namespace MINIGAME
                 if (handleEquipmentSlotUI[i].rightHandSlot01)
                 {
                     handleEquipmentSlotUI[i].AddItem(playerInventory.weaponsInRightHandSlots[0]);
-                    print(playerInventory.weaponsInRightHandSlots[0].name);
                 }
                 else if (handleEquipmentSlotUI[i].rightHandSlot02)
                 {

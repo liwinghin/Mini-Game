@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 465914}
   m_Layer: 0
-  m_Name: Sword 2
+  m_Name: Sword_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,19 +126,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 129084, guid: 47acc5b26852c45438ce84bf1364dea1, type: 3}
   m_PrefabInstance: {fileID: 2222208449473280969}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7631692401663084530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2222208449473151989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ac5ad803ceb749f3b7ceaa6c85dc434, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentWeaponDamage: 20
 --- !u!65 &4283826784656288232
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -152,6 +139,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.13671371, y: 0.91636324, z: 0.059882578}
   m_Center: {x: 0.0018092375, y: 0.6240939, z: -0.0000010803342}
+--- !u!114 &7631692401663084530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2222208449473151989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac5ad803ceb749f3b7ceaa6c85dc434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeaponDamage: 20
 --- !u!4 &2222208449473631141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 436332, guid: 47acc5b26852c45438ce84bf1364dea1, type: 3}

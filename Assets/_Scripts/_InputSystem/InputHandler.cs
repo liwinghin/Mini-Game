@@ -20,6 +20,9 @@ namespace MINIGAME
 
         public bool jump_Input;
         public bool inventory_Input;
+        public bool lockOn_Input;
+        public bool right_lock_Input;
+        public bool left_lock_Input;
 
         public bool d_Pad_Up;
         public bool d_Pad_Down;
@@ -29,6 +32,8 @@ namespace MINIGAME
         public bool rollFlag;
         public bool sprintFlag;
         public bool comboFlag;
+        public bool lockOnFlag;
+
         public bool inventoryFlag;
 
         public float rollInputTimer;
@@ -37,6 +42,7 @@ namespace MINIGAME
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         PlayerManager playerManager;
+        CameraHandler cameraHandler;
         UIManager uIManager;
 
         Vector2 movementInput;
@@ -48,6 +54,7 @@ namespace MINIGAME
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
             uIManager = FindObjectOfType<UIManager>();
+            cameraHandler = FindObjectOfType<CameraHandler>();
         }
 
         public void OnEnable()
@@ -55,8 +62,23 @@ namespace MINIGAME
             if (inputActions == null)
             {
                 inputActions = new PlayerControls();
+                //Player Movement
                 inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
                 inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+                inputActions.PlayerMovement.LockOnTargetLeft.performed += i => left_lock_Input = true;
+                inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_lock_Input = true;
+
+                //Player Quick Slots
+                inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+                inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+
+                //Player Action
+                inputActions.PlayerActions.RB.performed += i => rb_Input = true;
+                inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+                inputActions.PlayerActions.A.performed += i => a_Input = true;
+                inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
+                inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
+                inputActions.PlayerActions.LockOn.performed += i => lockOn_Input = true;
             }
             inputActions.Enable();
         }
@@ -68,16 +90,15 @@ namespace MINIGAME
 
         public void TickInput(float delta)
         {
-            MoveInput(delta);
+            HandleMoveInput(delta);
             HandleRollInput(delta);
             HandleAttackInput(delta);
             HandleQuickSlotsInput();
-            HandleInteractionButtonInput();
-            HandleJumpInput();
             HandleInventoryInput();
+            HandleLockOnInput();
         }
 
-        private void MoveInput(float delta)
+        private void HandleMoveInput(float delta)
         {
             horizontal = movementInput.x;
             vertical = movementInput.y;
@@ -89,11 +110,11 @@ namespace MINIGAME
         private void HandleRollInput(float delta)
         {
             b_Input = inputActions.PlayerActions.Roll.IsPressed();
+            sprintFlag = b_Input;
 
             if (b_Input)
             {
                 rollInputTimer += delta;
-                sprintFlag = true;
             }
             else
             {
@@ -108,9 +129,6 @@ namespace MINIGAME
 
         private void HandleAttackInput(float delta)
         {
-            inputActions.PlayerActions.RB.performed += i => rb_Input = true;
-            inputActions.PlayerActions.RT.performed += i => rt_Input = true;
-
             if (rb_Input)
             {
                 if (playerManager.canDoCombo)
@@ -136,9 +154,6 @@ namespace MINIGAME
 
         private void HandleQuickSlotsInput()
         {
-            inputActions.PlayerActions.DPadRight.performed += i => d_Pad_Right = true;
-            inputActions.PlayerActions.DPadLeft.performed += i => d_Pad_Left = true;
-
             if (d_Pad_Right)
             {
                 playerInventory.ChangeRightWeapon();
@@ -149,19 +164,8 @@ namespace MINIGAME
             }
         }
 
-        private void HandleInteractionButtonInput()
-        {
-            inputActions.PlayerActions.A.performed += i => a_Input = true;
-        }
-
-        private void HandleJumpInput()
-        {
-            inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
-        }
-
         private void HandleInventoryInput()
         {
-            inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
             if (inventory_Input)
             {
                 inventoryFlag = !inventoryFlag;
@@ -180,5 +184,47 @@ namespace MINIGAME
                 }
             }
         }
+
+        private void HandleLockOnInput()
+        {
+            if(lockOn_Input && !lockOnFlag)
+            {
+                lockOn_Input = false;
+                cameraHandler.HandleLockOn();
+                if(cameraHandler.nearestLockOnTarget != null)
+                {
+                    cameraHandler.currentLockOnTarget = cameraHandler.nearestLockOnTarget;
+                    lockOnFlag = true;
+                }
+            }
+            else if (lockOn_Input && lockOnFlag)
+            {
+                lockOn_Input = false;
+                lockOnFlag = false;
+                cameraHandler.ClearLockOnTargets();
+            }
+
+            if(lockOnFlag && left_lock_Input)
+            {
+                left_lock_Input = false;
+                cameraHandler.HandleLockOn();
+                if(cameraHandler.leftLockTarget != null)
+                {
+                    cameraHandler.currentLockOnTarget = cameraHandler.leftLockTarget;
+                }
+            }
+            if (lockOnFlag && right_lock_Input)
+            {
+                right_lock_Input = false;
+                cameraHandler.HandleLockOn();
+                if (cameraHandler.rightLockTarget != null)
+                {
+                    cameraHandler.currentLockOnTarget = cameraHandler.rightLockTarget;
+                }
+            }
+
+            cameraHandler.SetCameraHeight();
+        }
+
     }
 }
