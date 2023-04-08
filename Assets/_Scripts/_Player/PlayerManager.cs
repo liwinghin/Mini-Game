@@ -85,8 +85,9 @@ namespace MINIGAME
         public void CheckForInteractableObject()
         {
             RaycastHit hit;
-            if(Physics.SphereCast(transform.position, 0.2f, transform.forward, out hit, 1f, cameraHandler.ignoreLayer))
+            if(Physics.SphereCast(transform.position, 0.4f, transform.forward, out hit, 1f, cameraHandler.ignoreLayer))
             {
+
                 if (hit.collider.tag == "Interactable")
                 {
                     Interactable interactableObject = hit.collider.GetComponent<Interactable>();
@@ -98,7 +99,6 @@ namespace MINIGAME
                         //Set Pop Up Text
                         interactableUI.interactableText.text = interactableText;
                         interactableUIGameObject.SetActive(true);
-
                         if (inputHandler.a_Input)
                         {
                             hit.collider.GetComponent<Interactable>().Interact(this);

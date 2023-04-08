@@ -13,11 +13,10 @@ namespace MINIGAME
         public bool leftHandSlot01Selected;
         public bool leftHandSlot02Selected;
 
-        HandleEquipmentSlotUI[] handleEquipmentSlotUI;
+        public HandleEquipmentSlotUI[] handleEquipmentSlotUI;
 
         private void Start()
         {
-            handleEquipmentSlotUI = GetComponentsInChildren<HandleEquipmentSlotUI>();
         }
 
         public void LoadWeaponsOnEquipmentScreen(PlayerInventory playerInventory)
